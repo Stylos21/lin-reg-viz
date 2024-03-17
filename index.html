@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualization of Linear Regression</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- <div class="modal" id="parameters">
+        <div class="content">
+            <div class="header">
+                <h1>what are parameters?</h1>
+            </div>
+            <div class="written flex-content">
+                <p>Parameters in machine learning are simply defined as the quantites that are to be updated and optimized per training round. In linear regression, the parameters we want to update are the slope (defined as m), and the y-intercept (defined as b). Slope can be thought of as the constant rate of change of a linear equation. Say you are going to the grocery store to buy a few apples. The sign beside the apples show the price for each apple, and as you add more apples to your cart, the cost increases by the retail price. In the contet of a Cartesian plane, the number of apples in your cart is your x-coordinate, and the cost is the y-coordinate.</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia explicabo nihil dolorem nobis natus earum iste magni optio! Alias debitis eos sit esse vero exercitationem necessitatibus magni, voluptas vitae nam quibusdam aliquid harum nostrum nemo molestiae fugit praesentium, similique saepe?</p>
+
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container">
+
+        <div class="training fullscreen">
+            <div class="header">
+                <h1>linear regression visualization</h1>
+                <p id="desc">please input the following values to generate dummy data.</p>
+            </div>
+            <div class="flex-content">
+                <div id="graphContainer" class="flex-item hidden">
+                    <div id="graph"></div>
+                    <div id="stats" class="hidden">
+                        <p id="predData">predicted: ŷ = <span class="new_m" id="new_m">m</span>x + <span class="new_b"
+                                id="new_b">b</span></p>
+                        <p id="realData">actual: y = <span id="real_m" class="realM">m</span>x + <span class="realB" id="real_b">b</span></p>
+                        <div id="trainingData" class="flex-content">
+                            <p id="epoch">epoch:</p>
+                            <p id="loss" class="lossColored">loss:</p>
+
+                        </div>
+                        <img id="reset" src="assets/imgs/stop.png">
+                        <img id="pause" src="assets/imgs/pause.png">
+
+                    </div>
+                </div>
+                <div id="inputsDivs" class="flex-content">
+                    <div class="inputs flex-item" id="dataInputDiv">
+                        <p class="inpLabel">parameters</p>
+                        <div class="flex-item">
+                            <input type="number" placeholder="m (slope) (-1e6 to 1e6)" id="m" class="dataInputs realM">
+                        </div>
+                        <!-- <br> -->
+                        <div class="flex-item">
+                            <input type="number" placeholder="b (y-intercept) (-1e6 to 1e6)" id="b" class="dataInputs realB">
+                        </div>
+                        <!-- <div class="flex-content inpFlex"> -->
+                        <div class="flex-item">
+                            <div class="inpFlex flex-content">
+
+                            
+                            <input type="number" placeholder="# of points (0 to 5000)" id="points" class="positive dataInputs n">
+                            <div class="helpBtn" id="numInfo">?</div>
+                        </div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="inpFlex flex-content">
+                                <input type="number" placeholder="noise (-1 to 1)" id="noise" class="dataInputs" max="1" min="0" step="0.1">
+                                <div class="helpBtn" id="noiseInfo">?</div>
+                            </div>
+                        </div>
+                        <br>
+                        <button id="generate">generate data</button>
+                        <br>
+
+                    </div>
+                    <div class="inputs flex-item hidden" id="trainingInputs">
+                        <div class="flex-content">
+                            <p class="inpLabel">hyperparameters</p>
+                        </div>
+                        <div class="flex-content">
+
+                            <input type="number" placeholder="learning rate (0 to 1)" id="lr" class="positive trainingInputBoxes">
+                            <div class="helpBtn" id="lrHelp">?</div>
+                        </div>
+
+                        <br>
+                        <div class="flex-content">
+                            <input type="number" placeholder="epochs (1 to 10000)" id="epochs" class="positive trainingInputBoxes">
+                            <div class="helpBtn" id="epochHelp">?</div>
+
+                        </div>
+                        <br>
+                        <button id="train">train</button>
+                    </div>
+                </div>
+                <div class="trainingStats hidden">
+                    <p>C(m, b) = (1/<span class="n">N</span>)&sum;(ŷ - y) = (1/<span class="n">N</span>)&sum;(mx + b - y)<sup>2</sup></p>
+                    <p class="stat" id="loss">C(<span class="m_stat">7.37</span>, <span class="b_stat">3.34</span>) =
+                        <span class="lossColored" id="lossStat"></span>
+                    </p>
+                    <p class="stat" id="lossGrad">∇C = < <span class="mgrad">3.54</span>, <span
+                                class="bgrad">6.22</span> ></p>
+                    </p>
+                    <div class="flex-content">
+
+                        <div class="flex-item">
+                            <p>m = <span class="m_stat">7.37</span> - <span
+                                class="white" id="learningRate">0.01</span>(<span class="mgrad">3.54</span>) = <span
+                                    class="new_m"></span></p>
+                            <p>m = m - lr(∇C<sub>m</sub>)</p>
+                            <div class="graphsTrain" id="m_graph"></div>
+                            <div class="graphsTrain" id="grad_m_graph"></div>
+
+                        </div>
+                        <div class="flex-item">
+                            <p>b = <span class="b_stat">3.34</span> - <span
+                                class="white" id="learningRate">0.01</span>(<span class="bgrad">6.22</span>) = <span
+                                    class="new_b"></span></p>
+                            <p>b = b - lr(∇C<sub>b</sub>)</p>
+
+                            <div class="graphsTrain" id="b_graph"></div>
+                            <div class="graphsTrain" id="grad_b_graph"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hoverDiv hidden" id="modal">
+            <p id="hoverDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui pariatur unde ducimus
+                mollitia nemo voluptatibus sint, magnam eum sequi eveniet!</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

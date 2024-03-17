@@ -1,0 +1,347 @@
+* {
+    font-family: "JetBrains Mono"
+
+}
+body{
+    background-color:#131216;
+    color:#7E7E7E;
+    width: 100%;
+    height:100%;
+    margin:0;
+}
+
+.backprop-data{
+    position:absolute;
+    top:100%;
+    left:50%;
+    transform:translate(-50%,0%);
+    height:100vh;
+
+}
+.training {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.header {
+    text-align: center;
+    margin-top:50px;
+}
+#myDiv{
+    background-color:black;
+}
+
+.flex-content {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+
+}
+
+.inputs {
+    margin-top:20px;
+
+
+}
+
+
+
+.inputs input {
+    display:inline;
+}
+
+input {
+    margin:20px 0;
+    background-color:transparent;
+    border:none;
+    border-bottom:1px solid gray;
+    padding:10px;
+    width:300px;
+    color:white;
+    transition:.1s ease-out;
+    
+}
+
+.realM {
+    color:rgb(246, 112, 112);
+}
+
+.realB {
+    color:rgb(128, 140, 250);
+
+}
+
+.n{
+    color:rgb(103, 204, 123);
+}
+
+
+#noise{
+    color:rgb(206, 203, 112);
+    
+}
+
+
+#m:hover{
+    border-bottom:1px solid rgb(246, 112, 112);
+    transition:.1s;
+}
+
+
+#b:hover{
+    border-bottom:1px solid rgb(128, 140, 250);
+    transition:.1s;
+}
+
+#points:hover{
+    border-bottom:1px solid rgb(103, 204, 123);
+    transition:.1s;
+}
+
+#noise:hover{
+    border-bottom:1px solid rgb(206, 203, 112);
+    transition:.1s;
+    
+}
+
+#m:focus{
+    outline:1px solid rgb(246, 112, 112);
+    transition:.1s;
+    border:none;
+
+}
+#m:focus::placeholder{
+    color:rgb(246, 112, 112);
+    transition:.1s ;
+}
+
+#b:focus{
+    outline:1px solid rgb(128, 140, 250);
+    transition:.1s;
+    border:none;
+}
+
+#b:focus::placeholder{
+    color:rgb(128, 140, 250);
+    transition:.1s ;
+}
+
+#points:focus{
+    outline:1px solid rgb(103, 204, 123);
+    transition:.1s;
+    border:none;
+
+}
+
+#points:focus::placeholder{
+    color:rgb(103, 204, 123);
+    transition:.1s ;
+}
+
+#noise:focus{
+    outline:1px solid rgb(206, 203, 112);
+    transition:.1s;
+    border:none;
+
+    
+}
+
+#noise:focus::placeholder{
+    color:rgb(206, 203, 112);
+    transition:.1s ;
+}
+
+#lr:hover{
+    border-bottom:1px solid white;
+    transition:.1s;
+    
+}
+#lr:focus{
+    outline:1px solid white;
+    transition:.1s;
+    border:none;
+
+    
+}
+
+#lr:focus::placeholder{
+    color:white;
+    transition:.1s ;
+}
+
+#epochs{
+    color:rgb(246, 192, 112);
+
+}
+
+#epochs:hover{
+    border-bottom:1px solid rgb(246, 192, 112);
+    transition:.1s;
+}
+
+#epochs:focus{
+    outline:1px solid rgb(246, 192, 112);
+    transition:.1s;
+    border:none;
+
+}
+#epochs:focus::placeholder{
+    color:rgb(246, 192, 112);
+    transition:.1s ;
+}
+
+
+button:not(.helpBtn) {
+    margin:5px 0;
+    background-color: #262626;
+    color:#7E7E7E;
+    border:none;
+    padding: 8px 15px;
+}
+
+button:hover{
+    background-color: #1a1a1a;
+    cursor:pointer;
+
+}
+
+.flex-item {
+    margin:0 10px;
+    
+}
+
+.trainingStats {
+    width:50vw;
+}
+
+.trainingStats *{
+    text-align: center;
+
+}
+
+#stats {
+    text-align: center;
+    padding:30px;
+}
+
+#trainingData {
+    gap:30px;
+}
+
+.hidden {
+    display:none;
+}
+
+.m_stat{
+    color:rgb(237, 200, 200);
+}
+.b_stat{
+    color:rgb(210, 215, 255);
+}
+.mgrad{
+    color:rgb(171, 142, 142);
+
+}
+.bgrad{
+    color:rgb(131, 135, 175);
+
+}
+
+.new_m {
+    color:rgb(234, 158, 158)
+}
+
+.new_b {
+    color:rgb(151, 160, 243);
+}
+.graphsTrain {
+    width:200px;
+    height:200px;
+}
+
+.lossColored {
+    color: #d5aafe
+}
+
+.white {color:white}
+
+.inpLabel {
+    text-align:center;
+}
+
+.helpBtn{
+    border-radius:100%;
+    /* width:10px; 
+    height:10px; */
+    /* text-align:center; */
+    color:#7E7E7E;
+    background-color: #262626;
+    border: none;
+    margin-left:25px;
+    padding:5px 10px;
+}
+
+.inputInfo {
+    font-size:23px;
+    font-weight:bold;
+}
+
+img {
+    width: 20px;height:20px;
+}
+img:hover{
+    cursor:pointer;
+}
+
+/* .inpFlex input {
+    justify-content: center;
+    align-items: center;
+
+} */
+
+.inpFlex button{
+    margin:0 20px;
+}
+
+
+.inpFlex button{
+    /* position:absolute; */
+}
+
+.info {
+    border-radius:100%;
+
+}
+
+.helpBtn{
+    /* position:absolute; */
+    /* display:flex; */
+}
+
+.helpBtn:hover {
+    background-color:#9e9e9e;
+    color:#313131;
+    cursor:pointer;
+
+}
+
+.hoverDiv{
+    max-width:400px;
+    /* height:70px; */
+    padding:5px;
+    background-color:#1e1e1e;
+    /* display:flex;
+    justify-content: center;
+    align-items: center; */
+    text-align: center;
+    max-width:250px;
+
+    
+}
+
+.hoverDiv p{
+    font-size:12px;
+}
+
