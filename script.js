@@ -1,8 +1,3 @@
-// * Notes for Mar 9, 2024 development
-// ! More cleaning code up
-// ! Access specific epoch data
-// ! Edit parameter in training page
-
 let desc = document.getElementById("desc");
 let m = document.getElementById("m")
 let b = document.getElementById("b")
@@ -104,44 +99,6 @@ Array.from(positiveInps).forEach(inp => inp.addEventListener("change", e => {
         inp.value = 0;
     }
 }))
-
-// numInfo.addEventListener("mouseover", e => {
-//     hoverModal.classList.remove("hidden")
-//     let left = e.pageX;
-//     let top = e.pageY;
-//     console.log(left)
-//     hoverModal.style.position = "absolute";
-//     hoverModal.style.left = left + numInfo.style.width + "px";
-//     hoverModal.style.top = top + "px";
-// })
-
-// noiseInfo.addEventListener("mouseover", e => {
-//     hoverModal.classList.remove("hidden")
-//     let left = e.pageX;
-//     let top = e.pageY;
-//     console.log(left)
-//     hoverModal.style.position = "absolute";
-//     hoverModal.style.left = left + noiseInfo.style.width + "px";
-//     hoverModal.style.top = top + "px";
-// })
-
-// lrInfo.addEventListener("mouseover", e => {
-//     hoverModal.classList.remove("hidden")
-
-//     let left = e.pageX;
-//     let top = e.pageY;
-
-//     hoverModal.style.position = "absolute";
-//     hoverModal.style.left = (left - hoverModal.clientWidth) + numInfo.style.width + "px";
-//     hoverModal.style.top = top + "px";
-// })
-
-// epochInfo.addEventListener("mouseover", e => {
-
-
-
-
-// })
 
 Array.from(helpBtns).forEach(btn => btn.addEventListener("mouseover", (e) => {
     hoverModal.classList.remove("hidden")
@@ -249,10 +206,8 @@ function error_deriv_b(m, b, x, i, y) {
 
 
 function graphData(x, y, parameters) {
-    // console.log(x, y, parameters)
     graphDiv.classList.remove("hidden")
     trainingInputs.classList.remove("hidden")
-    // print(x, y)
     let trace1 = {
         x: x,
         y: y,
@@ -270,8 +225,6 @@ function graphData(x, y, parameters) {
     }
     let data = [trace1];
 
-
-    // document.getElementById("predData").innerHTML = `y = ${m}x + ${b}`
 
     let y_vals = [];
     for (let i = 0; i < x.length; i++) {
@@ -337,7 +290,6 @@ function generateData(parameters) {
 
     xs = []
     ys = []
-    // console.log(parameters)
     for (let i = 0; i < parameters.points; i++) {
         let xv = Math.random();
         xs.push(xv)
@@ -346,24 +298,16 @@ function generateData(parameters) {
         let y_round = Math.ceil(y * 1000) / 1000
         ys.push(y_round);
     }
-    // console.log(xs, ys)
     stats.classList.remove("hidden")
     graphData(xs, ys, parameters);
 }
 
-// ! Issues
-// ! Variable type conversion messes up training method
-// ! Make sure that the variables are properly updated
-// ! be able to make a function that is able to update the dashboard from just text AND array
+
 
 function train(xs, ys) {
-    // inputs.forEach(input => input.classList.add("hidden"))
     inputsDivs.classList.add("hidden")
     trainingStats.classList.remove("hidden")
-    // console.log(parameters)
-    // let m_para = parameters.m[parameters.m.length - 1];
-    // let b_para = parameters.b[parameters.b.length - 1];
-    // console.log(hyperparameters.epochs)
+
     let i = 0;
     let paused = false;
     document.getElementById("pause").addEventListener("click", () => {
@@ -443,7 +387,7 @@ function optimizeData(xs, ys) {
     }
     error_m /= xs.length;
     error_b /= xs.length;
-    // console.log(`m: ${m_para} b: ${b_para}`)
+
     m_para = m_para - (hyperparameters.learning_rate * (error_m))
 
     b_para = b_para - (hyperparameters.learning_rate * (error_b))
@@ -455,12 +399,10 @@ function optimizeData(xs, ys) {
     parameters.b.push(b_para)
     graphData(xs, ys, parameters)
 
-    // console.log(parameters, hyperparameters);
     updateTextData(parameters, hyperparameters);
     loss.innerHTML = `loss: ${Math.ceil(error * 1000) / 1000}`;
 
     updateTrainingData(parameters, hyperparameters)
-    // console.log(i)
 
     if (Math.abs(parameters.m[parameters.m.length - 1] - parameters.m[parameters.m.length - 2]) < Math.pow(10, -4) && Math.abs(parameters.b[parameters.b.length - 1] - parameters.b[parameters.b.length - 2]) < Math.pow(10, -4)) {
         i = hyperparameters.epochs;
@@ -470,10 +412,8 @@ function optimizeData(xs, ys) {
 }
 
 
-// }
 
 function updateTextData(parameters, hyperparameters) {
-    // console.log(parameters, hyperparameters)
     let lossText = document.getElementById("lossStat")
     let m_stats = document.getElementsByClassName("m_stat")
     let new_m_stat = document.getElementsByClassName("new_m")
@@ -659,10 +599,4 @@ function updateTrainingData(parameters, hyperparameters) {
     };
 
     Plotly.newPlot('grad_b_graph', [trace4], layout4, { displayModeBar: false, responsive: true });
-}
-
-// graphData([], [])
-
-function modal() {
-
 }
